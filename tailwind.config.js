@@ -233,7 +233,10 @@ module.exports = {
       150: "1.5",
       200: "2",
     },
-    container: {},
+    container: {
+      center: true,
+      padding: "1rem",
+    },
     content: {
       none: "none",
     },
