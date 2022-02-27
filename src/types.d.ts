@@ -81,3 +81,5 @@ type SearchMoviesResponse =
       results: MovieSummaryType[];
     })
   | ResponseErrorType;
+
+type MovieDetailsResponse = MovieDetailType | ResponseErrorType;
