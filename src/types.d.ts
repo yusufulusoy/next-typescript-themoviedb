@@ -88,4 +88,9 @@ type SimilarMoviesResponse =
     })
   | ResponseErrorType;
 
+type UpcomingMoviesResponse =
+  | (ResponsePaginationType & {
+      results: MovieSummaryType[];
+    })
+  | ResponseErrorType;
 type MovieDetailsResponse = MovieDetailType | ResponseErrorType;
