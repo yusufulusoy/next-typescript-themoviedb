@@ -3,6 +3,7 @@ import type { GetServerSideProps, GetServerSidePropsContext } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { Layout, MovieCard } from "@components";
+import Link from "next/link";
 
 const Search = ({
   results,
@@ -21,11 +22,28 @@ const Search = ({
           {results.total_results} results for:{" "}
           <span className="font-bold">{router.query.q}</span>
         </h1>
-        <section className="grid grid-cols-5 gap-4">
+        <section className="grid grid-cols-5 gap-4 my-5">
           {results?.results?.map((result) => (
             <MovieCard key={result.id} movie={result} horizontal />
           ))}
         </section>
+        <nav
+          className="flex items-center justify-center mb-5"
+          role="navigation"
+        >
+          {results.page - 1 > 0 && (
+            <Link href={`/search?q=${router.query.q}&page=${results.page - 1}`}>
+              <a className="block bg-slate-800 px-3 py-2 rounded-full mx-1">
+                Previous Page ({results.page - 1})
+              </a>
+            </Link>
+          )}
+          <Link href={`/search?q=${router.query.q}&page=${results.page + 1}`}>
+            <a className="block bg-slate-800 px-3 py-2 rounded-full mx-1">
+              Next Page ({results.page + 1})
+            </a>
+          </Link>
+        </nav>
       </div>
     </>
   );
