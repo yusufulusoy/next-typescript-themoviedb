@@ -22,7 +22,7 @@ const Search = ({
           <span className="font-bold">{router.query.q}</span>
         </h1>
         <section className="grid grid-cols-5 gap-4">
-          {results.results.map((result) => (
+          {results?.results?.map((result) => (
             <MovieCard key={result.id} movie={result} horizontal />
           ))}
         </section>
