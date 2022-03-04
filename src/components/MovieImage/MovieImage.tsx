@@ -38,8 +38,8 @@ const toBase64 = (str: string) =>
     ? Buffer.from(str).toString("base64")
     : window.btoa(str);
 
-const posterLoader: ImageLoader = ({ src, width }) => {
-  return `/api/images?source=${src}&w=w${width || "500"}`;
+const posterLoader: ImageLoader = ({ src }) => {
+  return `/api/images?path=${src}`;
 };
 
 export const MovieImage: React.FC<MovieImageProps> = ({ source, alt }) => {
