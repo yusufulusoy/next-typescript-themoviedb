@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useClickOutside } from "@hooks";
 
 const Search: React.FC = () => {
   const router = useRouter();
+  const searchContainerRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState<string>("");
   const [history, setHistory] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  useClickOutside(searchContainerRef, () => setIsOpen(false));
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,8 +30,6 @@ const Search: React.FC = () => {
       if (savedHistory.length > 5) {
         savedHistory.pop();
       }
-      console.log("savedHistory", savedHistory);
-      console.log("savedHistoryLength", savedHistory.length);
       setHistory(savedHistory);
       localStorage.setItem("history", JSON.stringify(savedHistory));
     }
@@ -54,7 +56,7 @@ const Search: React.FC = () => {
   }, [router.isReady]);
 
   return (
-    <div className="relative">
+    <div className="relative" ref={searchContainerRef}>
       <form
         onSubmit={handleSearch}
         className={`relative w-full flex items-center rounded-full shadow-sm py-2 pl-2 pr-3 z-50 bg-slate-800 highlight-white/5 ${
@@ -82,7 +84,6 @@ const Search: React.FC = () => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setIsOpen(true)}
-          onBlur={() => setIsOpen(false)}
         />
         <button type="submit" className="font-bold text-xs pr-2">
           SEARCH
