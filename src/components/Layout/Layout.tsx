@@ -5,8 +5,8 @@ const Layout: React.FC = ({ children }) => {
   return (
     <div className="layout">
       <header className="mb-3">
-        <div className="container mx-auto flex items-center justify-between py-5 px-3 xl:px-0 border-b border-slate-800">
-          <div className="flex-initial w-auto">
+        <div className="container mx-auto flex items-center justify-between py-5 px-3 border-b border-slate-800">
+          <div className="hidden md:block flex-initial w-auto">
             <Link href="/">
               <a>
                 <Brand className="w-40" />
@@ -16,7 +16,7 @@ const Layout: React.FC = ({ children }) => {
           <div className="flex-initial max-w-xl w-full px-3">
             <Search />
           </div>
-          <nav className="flex-initial min-w-[10rem]">
+          <nav className="flex-initial md:min-w-[10rem]">
             <ul className="flex items-center justify-end">
               <li>
                 <Link href="/">

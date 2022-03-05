@@ -22,7 +22,7 @@ const Search = ({
           {results.total_results} results for:{" "}
           <span className="font-bold">{router.query.q}</span>
         </h1>
-        <section className="grid grid-cols-5 gap-4 my-5">
+        <section className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 my-5">
           {results?.results?.map((result) => (
             <MovieCard key={result.id} movie={result} horizontal />
           ))}
@@ -55,7 +55,7 @@ export const getServerSideProps: GetServerSideProps = async (
   const query = ctx.query.q;
   const page = ctx.query.page || 1;
   const results = await fetch(
-    `${process.env.BASE_URL}/api/search?query=${query}&page=${page}`
+    `${process.env.BASE_URL}/api/search?query=${query}&page=${page}&include_adult=false`
   ).then((res) => res.json());
 
   return {
